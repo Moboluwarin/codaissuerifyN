@@ -1,4 +1,6 @@
 <h1><%=@artist.name%></h1>
 <p>Image: <%=@artist.remote_image_url%></p>
 <hr>
+<%=link_to "[see songs]", artist_songs_path(@artist.id)%>
+
 <%=link_to "[Delete]", artist_path(@artist.id), method: :delete,  data: {confirm: "Are you sure?"}%>

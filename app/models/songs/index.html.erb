@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-3">
+
+    <h1 class="sidebar-item"><%= @artist.name %></h1>
+
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        playlists
+      </div>
+      <div class="panel-body">
+
+        <% @songs.each do |song| %>
+        <div class="row">
+          <div class="col-md-7">
+            <h4><%= song.title %></h4>
+          </div>
+          <div class="col-md-3 right">
+            <%= link_to "View", song, class: "btn btn-default" %>
+            <%= link_to "Update", edit_song_path(song), class: "btn btn-default" %>
+            <%= link_to "Delete", song_path(song), method: :delete, data: {confirm: "Are you sure ?"} ,class: "btn btn-default"  %>
+          </div>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+
+    <%= link_to "Add new a song", new_song_path, class: "btn btn-primary" %>
+  </div>
+</div>
