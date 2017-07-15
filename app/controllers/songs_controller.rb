@@ -3,6 +3,7 @@ class SongsController < ApplicationController
   def index
     @artist = Artist.find(params[:artist_id])
     @songs = @artist.songs
+     @song =Song.new
   end
   def show
    end
@@ -16,13 +17,28 @@ class SongsController < ApplicationController
 
    end
    def create
-     @song = Song.new(params[:Song])
+     @artist = Artist.find(params[:artist_id])
+     @song = @artist.songs.create(song_param)
 
-    if @song.save
-      redirect_to @song, notice: "Song Saved"
-    else
-      render :new
-    end
+
+     respond_to do |format|
+         if @song.save
+           format.html { redirect_to artist_songs_path(@artist.id) , notice: 'Song was successfully created.'}
+           format.json { render :show, status: :created, location: @song }
+         else
+           format.html { redirect_to ([@artist, @song]) }
+           format.json { render json: @song.errors, status: :unprocessable_entity }
+         end
+       end
+  end
+
+  private
+  def song_param
+    params
+      .require(:song)
+      .permit(
+        :title, :song_url
+      )
   end
 
 end
