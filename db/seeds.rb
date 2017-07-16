@@ -12,6 +12,6 @@ artist1 = Artist.create!(name:"Michael", remote_image_url:"http://www.uaway.com"
 artist2 = Artist.create!(name:"Miew", remote_image_url:"http://www.uaway.com")
 artist3 = Artist.create!(name:"allo", remote_image_url:"http://www.uaway.com")
 
-song1 = Song.create!(title:"leave", song_url:"http://www.uaway.com", artist:artist1)
-song2 = Song.create!(title:"again", song_url:"http://www.uaway.com", artist:artist2)
-song3 = Song.create!(title:"again", song_url:"http://www.uaway.com", artist:artist3)
+song1 = Song.create!(title:"leave", artist:artist1)
+song2 = Song.create!(title:"again", artist:artist2)
+song3 = Song.create!(title:"again", artist:artist3)
