@@ -58,9 +58,24 @@ function cleanUpDoneSongs(event) {
     .then(updateCounters);
 }
 
+function deleteSong(songId) {
+  $.ajax({
+    type: "DELETE",
+    url: artist_songs_path(@artist.id) + ".json",
+    contentType: "application/json",
+    dataType: "json"
+  })
+  .done(function(data) {
+    $('tr[data-id="'+songId+'"]').remove();
+    updateCounters();
+  });
+}
+
+
 $(document).ready(function() {
   $("input[type=checkbox]").bind('change', toggleDone);
   $("form").bind('submit', submitSong);
-  $("#clean-up").bind('click', cleanUpDoneSongs);
+  $("#Delete-all").bind('click', cleanUpDoneSongs);
+  $("#Delete").bind('click', deleteSong(song.id));
   updateCounters();
 });
